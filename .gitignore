@@ -13,3 +13,4 @@ Nuget.config
 dataplatform-service-account.jso*
 /TestResults
 .idea
+[Tt]estResults/

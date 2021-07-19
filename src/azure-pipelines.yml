@@ -1,0 +1,76 @@
+name: '$(Build.SourceBranchName)-$(MajorVersion).$(MinorVersion).$(SubminorVersion).$(Build.BuildNumber)'
+
+trigger:
+  - master
+  - develop
+  - feature/CI
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfigurations: 'Release'
+  majorVersion: 0
+  minorVersion: 0
+  subminorVersion: 1
+  mainProjectName: 'RoadRunner.csproj'
+  mainProject: 'src/RoadRunner.csproj'
+  testProject: 'src/tests/RoadRunner.Tests/RoadRunner.Tests.csproj'
+steps:
+  - task: UseDotNet@2
+    displayName: 'Setting .NET Core Version'
+    inputs:
+      version: '5.0.x'
+      includePreviewVersions: false;
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Restoring packages'
+    inputs:
+      command: 'restore'
+      projects: '**/*.csproj'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet publish'
+    inputs:
+      command: publish
+      publishWebProjects: false
+      projects: '$(mainProject)'
+      arguments: '-c Release'
+      zipAfterPublish: false
+      modifyOutputPath: false
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet test'
+    inputs:
+      command: test
+      projects: '$(testProjects)'
+      arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --logger trx --results-directory $(Build.SourcesDirectory)/result-tests'
+      publishTestResults: false
+
+  - powershell: |
+      dotnet tool install -g dotnet-reportgenerator-globaltool
+      reportgenerator -reports:$(Build.SourcesDirectory)\result-tests\**\coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)\CodeCoverage "-reporttypes:HtmlInline_AzurePipelines;Cobertura"
+    displayName: 'Generating Code Coverage Report'
+    continueOnError: true
+
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish code coverage report'
+    inputs:
+      codeCoverageTool: 'Cobertura'
+      summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
+
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish code coverage from $(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
+      reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage/'
+    continueOnError: true
+
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results **/*.trx'
+    inputs:
+      testResultsFormat: VSTest
+      testResultsFiles: '**/*.trx'
+      searchFolder: '$(Build.SourcesDirectory)/result-tests'
+      mergeTestResults: true
