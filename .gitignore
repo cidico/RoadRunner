@@ -1,0 +1,15 @@
+*.vs
+*.vscode
+*.cache
+*.user
+[Rr]elease*/
+[Dd]ebug*/
+[Pp]ackages*/
+[Bb]in*/
+[Oo]bj/
+/.axoCover/
+build/
+Nuget.config
+dataplatform-service-account.jso*
+/TestResults
+.idea

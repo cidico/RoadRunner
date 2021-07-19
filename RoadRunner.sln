@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadRunner", "src\RoadRunner.csproj", "{A2EC15FC-0DFD-418D-ADB2-465F1A36F392}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{715D06B3-F79D-463F-A55C-82B1141ACD32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C6B5E58F-9830-4D03-A255-506CCBB99611}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoadRunner.Tests", "tests\RoadRunner.Tests\RoadRunner.Tests.csproj", "{9F1EDC6F-618E-4232-BC09-67CEF3FD1E77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2EC15FC-0DFD-418D-ADB2-465F1A36F392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2EC15FC-0DFD-418D-ADB2-465F1A36F392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2EC15FC-0DFD-418D-ADB2-465F1A36F392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2EC15FC-0DFD-418D-ADB2-465F1A36F392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F1EDC6F-618E-4232-BC09-67CEF3FD1E77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F1EDC6F-618E-4232-BC09-67CEF3FD1E77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F1EDC6F-618E-4232-BC09-67CEF3FD1E77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F1EDC6F-618E-4232-BC09-67CEF3FD1E77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A2EC15FC-0DFD-418D-ADB2-465F1A36F392} = {715D06B3-F79D-463F-A55C-82B1141ACD32}
+		{9F1EDC6F-618E-4232-BC09-67CEF3FD1E77} = {C6B5E58F-9830-4D03-A255-506CCBB99611}
+	EndGlobalSection
+EndGlobal
