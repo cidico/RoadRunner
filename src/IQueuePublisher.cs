@@ -16,7 +16,7 @@ namespace RoadRunner
         /// </summary>
         /// <param name="channelName"></param>
         /// <param name="message"></param>
-        void Publish(string channelName, string message);
+        void PublishAsync(string channelName, string message);
 
         /// <summary>
         /// Initializes the publisher connection with RabbitMQ defined in the configuration file.

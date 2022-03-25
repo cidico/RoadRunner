@@ -21,7 +21,7 @@ namespace RoadRunner
         
         public static void Publish(string publisherName, string channelName, string message)
         {
-            WorkingPublishers[publisherName].Publish(channelName, message);
+            WorkingPublishers[publisherName].PublishAsync(channelName, message);
         }
     }
 }
